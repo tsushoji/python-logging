@@ -1,5 +1,5 @@
 {
   "loglevel":"INFO",
-  "output_filepath":"C:\\test\\test.log",
+  "output_folder_path":"Z:\\test",
   "stdout":"False"
 }

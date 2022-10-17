@@ -26,7 +26,8 @@ class LogManager() :
             with open(setting_file_path_json) as f:
                 config = json.load(f)
             if config is not None:
-                self.filename = config['output_filepath']
+                folder = config['output_folder_path']
+                self.filename = self.__create_log_path(folder)
                 if config['stdout'] == 'True':
                     stdout = True
                 level_str = config['loglevel']
@@ -121,12 +122,13 @@ class LogManager() :
             level = 50
         self.logger.setLevel(level)
 
-    def __create_log_path(self):
+    def __create_log_path(self,folder=''):
         '''
         __file__ の内容を使って、ログファイルのパスの初期値を生成する
         '''
         today=datetime.date.today()
-        folder = os.path.join(self.__get_parent(__file__),'logs')
+        if folder == '':
+            folder = os.path.join(self.__get_parent(__file__),'logs')
         if os.path.exists(folder) == False:
             os.makedirs(folder)
         name_today_prefix = today.strftime('%Y%m%d')
