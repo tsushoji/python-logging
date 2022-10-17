@@ -4,6 +4,7 @@ import os
 import __main__
 import inspect
 import json
+import traceback
 
 class LogManager() :
     '''
@@ -54,6 +55,12 @@ class LogManager() :
         ログにエラーメッセージを出力する
         '''
         self.logger.error(self.__get_file_name_and_line_no_caller()+message)
+    
+    def traceback(self):
+        '''
+        ログにスタックトレースを出力する
+        '''
+        self.logger.error(traceback.format_exc())
         
     def warning(self,message):
         '''
